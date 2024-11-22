@@ -322,10 +322,18 @@ def JHO_Everage_9year_woman(JHO_area):
 
 # 6-1. 연도별 전체 인구 상위 5개 지역 출력
 def JHO_top5_t(JHO_year):
-    JHO_year = int(JHO_year)
+    try:
+        JHO_year = int(JHO_year)
+    except ValueError:
+        return "올바른 형식의 연도를 입력해야 합니다."
+
     if JHO_year in JHO_pop:
+        # 연도의 데이터에서 상위 5개 지역 정렬
+        JHY_sorted_data = sorted(JHO_pop[JHO_year].items(), key=lambda x: x[1], reverse=True)
+        JHT_top5 = JHY_sorted_data[:5]
+        return JHT_top5
     else:
-        return
+        return f"{JHO_year}년 데이터가 존재하지 않습니다."
         
 # 6-2. 연도별 남성 인구 상위 5개 지역 출력
 
