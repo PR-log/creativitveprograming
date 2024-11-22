@@ -423,6 +423,18 @@ def JHO_menu():
             else:
                 print(JHO_cho_1+"은 확인할 수 없는 단어입니다.")
         # 2번을 누를 시
+        if JHO_cho == 2:
+            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
+            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요.")
+            JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등)")
+            if JHO_sel == "전체":
+                print(JHO_year_area_total(JHO_year, JHO_area))
+            elif JHO_sel == "남성":
+                print(JHO_year_area_m(JHO_year, JHO_area))
+            elif JHO_sel =="여성":
+                print(JHO_year_area_w(JHO_year, JHO_area))
+            else:
+                print("올바른 형식이 아닙니다.")
         
         # 3번을 누를 시
 
