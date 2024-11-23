@@ -367,20 +367,20 @@ def JHO_gender_ratio(JHO_year, JHO_area):
     except ValueError:
         return "올바른 형식의 연도를 입력해야 합니다."
     if JHO_year in JHO_pop:
-        if JHO_area in JHO_pop[year]:
-            JHO_man = JHO_pop[JHO_year][JHO_area]["남성"]
-            JHO_woman = JHO_pop[JHO_year][JHO_area]["여성"]
-            JHO_total = JHO_man + JHO_woman
-            if JHO_total == 0:
-                return str(JHO_year)+"년"+(JHO_area)+"의 인구가 0명입니다."
-            JHO_man_ratio = (JHO_man / JHO_total) * 100
-            JHO_woman_ratio = (JHO_woman / tJHO_total) * 100
+        if JHO_area in JHO_pop[JHO_year]:
+            JHO_m = JHO_pop[JHO_year][JHO_area]["남성"]
+            JHO_w = JHO_pop[JHO_year][JHO_area]["여성"]
+            JHO_t = JHO_m + JHO_w
+            if JHO_t == 0:
+                return str(JHO_year)+"년"+str(JHO_area)+"의 인구가 0명입니다."
+            JHO_m_ratio = (JHO_m / JHO_t) * 100
+            JHO_w_ratio = (JHO_w / JHO_t) * 100
 
-            return (JHO_year)+"년"+(JHO_area)+"의 남성 비율은 "+(JHO_male_ratio)+"%, 여성 비율은 "+(JHO_woman_ratio5)+"%입니다."
+            return str(JHO_year)+"년"+str(JHO_area)+"의 남성 비율은 "+str(JHO_m_ratio)+"%, 여성 비율은 "+str(JHO_w_ratio)+"%입니다."
         else:
-            return (JHO_area)+"의 데이터가 존재하지 않습니다."
+            return str(JHO_area)+"의 데이터가 존재하지 않습니다."
     else:
-        return (JHO_year)+"년의 데이터가 존재하지 않습니다."
+        return str(JHO_year)+"년의 데이터가 존재하지 않습니다."
 #########################################################################
 # 8. 그래프
 
@@ -457,6 +457,10 @@ def JHO_menu():
         # 6번을 누를 시
 
         # 7번을 누를 시
+        if JHO_cho == 7:
+                JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
+                JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등)")
+                print(JHO_gender_ratio(JHO_year, JHO_area))
 
         # 8번을 누를 시
 
