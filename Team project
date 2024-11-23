@@ -328,19 +328,11 @@ def JHO_9_w(JHO_area):
         return str(JHO_area) + "의 9년간 평균 여성인구는 " + str(int(JHO_12)) + "명입니다."
     else:
         return str(JHO_area) + "의 데이터가 존재하지 않습니다."
-##########################################################################
-# 5. 특정 연도의 지역별 인구 증가율 / 감소율 출력
-
-# 5-1 특정 연도의 지역별 전체 인구 증가율 / 감소율 출력
-
-# 5-2. 특정 연도의 지역별 남성 인구 증가율 / 감소율 출력
-
-# 5-3. 특정 연도의 지역별 여성 인구 증가율 / 감소율 출력
 
 #########################################################################
-# 6. 연도별 인구 상위 5개 지역 출력
+# 5. 연도별 인구 상위 5개 지역 출력
 
-# 6-1. 연도별 전체 인구 상위 5개 지역 출력
+# 5-1. 연도별 전체 인구 상위 5개 지역 출력
 def JHO_top5_t(JHY_year):
     try:
         JHY_year = int(JHY_year)
@@ -355,12 +347,12 @@ def JHO_top5_t(JHY_year):
     else:
         return f"{JHY_year}년 데이터가 존재하지 않습니다."    
         
-# 6-2. 연도별 남성 인구 상위 5개 지역 출력
+# 5-2. 연도별 남성 인구 상위 5개 지역 출력
 
-# 6-3. 연도별 여성 인구 상위 5개 지역 출력
+# 5-3. 연도별 여성 인구 상위 5개 지역 출력
 
 #########################################################################
-# 7. 특정 연도 지역의 성비
+# 6. 특정 연도 지역의 성비
 def JHO_gender_ratio(JHO_year, JHO_area):
     try:
         JHO_year = int(JHO_year)
@@ -382,17 +374,69 @@ def JHO_gender_ratio(JHO_year, JHO_area):
     else:
         return str(JHO_year)+"년의 데이터가 존재하지 않습니다."
 #########################################################################
-# 8. 그래프
+# 7. 그래프
 
-# 8-1. 특정 연도의 지역별 인구 그래프
+# 7-1. 특정 연도의 지역별 인구 그래프
+import turtle
 
-# 8-2. 특정 지역의 연도별 총인구 그래프
+# 터틀 그래프로 바 차트 그리기 함수
+def JHO_year_graph(JHO_year):
+    # 터틀 초기화
+    screen = turtle.Screen()
+    screen.setup(width=1000, height=400)  # 화면 크기를 더 작게 설정
+    t = turtle.Turtle()
+    t.speed(0)
 
-# 8-3. 특정 지역의 연도별 남성인구 그래프
+    # 그래프 기본 설정
+    t.penup()
+    t.goto(-2000, -150)  # 시작 위치
+    t.pendown()
 
-# 8-4. 특정 지역의 연도별 여성인구 그래프
+    # 바 차트 그리기
+    bar_width = 30  # 바 너비를 작게 설정
+    spacing = 5  # 간격을 작게 설정
+    x_pos = -200
+    max_height = 40000000  # 최대 높이를 더 작은 값으로 설정 (비례적 스케일링)
 
-# 8-5. 특정 연도의 지역별 총인구, 남성인구, 여성인구 그래프
+    for region, pop_data in JHO_pop[JHO_year].items():
+        population = pop_data["총"]
+
+        # 바 높이 계산 (스케일을 더 낮춰서 그래프 크기를 줄임)
+        bar_height = (population / max_height) * 200  # 비례적 스케일링
+
+        # 바 그리기
+        t.penup()
+        t.goto(x_pos, -150)
+        t.pendown()
+        t.begin_fill()
+        t.fillcolor("black")
+        t.setheading(90)
+        t.forward(bar_height)
+        t.right(90)
+        t.forward(bar_width)
+        t.right(90)
+        t.forward(bar_height)
+        t.end_fill()
+
+        # 지역명 표시
+        t.penup()
+        t.goto(x_pos + bar_width / 2, -170)  # 지역명을 그래프 밑에 조금 더 가깝게 설정
+        t.write(region, align="center")
+
+        # 다음 바로 이동
+        x_pos += bar_width + spacing
+
+    # 터틀 숨기기
+    t.hideturtle()
+    screen.mainloop()
+
+# 7-2. 특정 지역의 연도별 총인구 그래프
+
+# 7-3. 특정 지역의 연도별 남성인구 그래프
+
+# 7-4. 특정 지역의 연도별 여성인구 그래프
+
+# 7-5. 특정 연도의 지역별 총인구, 남성인구, 여성인구 그래프
 
 ##########################################################################
 # 시작메뉴
@@ -404,11 +448,10 @@ def JHO_menu():
         print("2. 특정 연도의 지역 인구 추출")
         print("3. 특정 연도의 최고 인구, 최저 인구")
         print("4. 특정 지역의 9년간 평균 인구 계산")
-        print("5. 특정 연도의 지역별 인구 증가율 / 감소율")
-        print("6. 연도별 인구 상위 5개 지역 출력")
-        print("7. 특정 연도 및 지역의 성비")
-        print("8. 그래프로 손쉽게 확인하기")
-        print("9. 종료")
+        print("5. 연도별 인구 상위 5개 지역 출력")
+        print("6. 특정 연도 및 지역의 성비")
+        print("7. 그래프로 손쉽게 확인하기")
+        print("8. 종료")
         JHO_cho = int(input("숫자를 입력하세요."))
         # 1번을 누를 시
         if JHO_cho == 1:
@@ -455,16 +498,14 @@ def JHO_menu():
         # 5번을 누를 시
 
         # 6번을 누를 시
-
-        # 7번을 누를 시
         if JHO_cho == 7:
                 JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
                 JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등)")
                 print(JHO_gender_ratio(JHO_year, JHO_area))
 
-        # 8번을 누를 시
+        # 7번을 누를 시
 
-        # 9번을 누를 시
+        # 8번을 누를 시
         elif JHO_cho == 9:
             print("이용해주셔서 감사합니다. 프로그램을 종료합니다.")
             break
