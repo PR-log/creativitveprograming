@@ -419,50 +419,50 @@ def JHO_year_graph(JHO_year):
         print("올바른 형식의 연도를 입력해주세요")
         return
     if 'screen' not in globals():
-        global screen
-        screen = turtle.Screen()
-        screen.setup(width=900, height=600)
+        global JHO_screen
+        JHO_screen = turtle.Screen()
+        JHO_screen.setup(width=900, height=600)
 
-    t = turtle.Turtle()
-    t.speed(0)
-    t.penup()
-    t.goto(0, -150)
-    t.pendown()
+    JHO = turtle.Turtle()
+    JHO.speed(0)
+    JHO.penup()
+    JHO.goto(0, -150)
+    JHO.pendown()
 
-    bar_width = 40
-    spacing = 5
-    x_pos = -400
+    JHO_width = 40 # 막대의 너비
+    JHO_space = 5 # 막대간 간격
+    JHO_x = -400 # 현재 막대의 x좌표
 
-    for region, pop_data in JHO_pop[JHO_year].items():
-        if region == "전국":
+    for JHO_area, JHO_data in JHO_pop[JHO_year].items():
+        if JHO_area == "전국":
             continue
-        population = pop_data["총"]
-        bar_height = (population / 50000)
+        JHO_per = JHO_data["총"]
+        JHO_height = (JHO_per / 50000)
 
-        t.penup()
-        t.goto(x_pos, -150)
-        t.pendown()
-        t.begin_fill()
-        t.fillcolor("black")
-        t.setheading(90)
-        t.forward(bar_height)
-        t.right(90)
-        t.forward(bar_width)
-        t.right(90)
-        t.forward(bar_height)
-        t.end_fill()
+        JHO.penup()
+        JHO.goto(JHO_x, -150)
+        JHO.pendown()
+        JHO.begin_fill()
+        JHO.fillcolor("black")
+        JHO.setheading(90)
+        JHO.forward(JHO_height)
+        JHO.right(90)
+        JHO.forward(JHO_width)
+        JHO.right(90)
+        JHO.forward(JHO_height)
+        JHO.end_fill()
 
-        t.penup()
-        t.goto(x_pos + bar_width / 2, -170)
-        t.write(region, align="center")
+        JHO.penup()
+        JHO.goto(JHO_x + JHO_width / 2, -170)
+        JHO.write(JHO_area, align="center")
 
-        t.goto(x_pos + bar_width / 2, -150 + bar_height)  # 막대 위쪽으로 이동
-        t.write(population, align="center")  # 인구 수 표시
+        JHO.goto(JHO_x + JHO_width / 2, -150 + JHO_height)  # 막대 위쪽으로 이동
+        JHO.write(JHO_per, align="center")  # 인구 수 표시
 
 
-        x_pos += bar_width + spacing
+        JHO_x += JHO_width + JHO_space
 
-    t.hideturtle()
+    JHO.hideturtle()
 ##########################################################################
 # 시작메뉴
 def JHO_menu():
