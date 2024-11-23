@@ -183,7 +183,9 @@ JHO_pop = {
 }
 #######################################################################
 # 1. 특정 연도의 인구 추출 함수
+
 # 1-1. 특정 연도의 전국 총인구 추출 함수
+
 def JHO_year_total(JHO_year):
     try:
         JHO_year = int(JHO_year)
@@ -194,7 +196,9 @@ def JHO_year_total(JHO_year):
         return str(JHO_year) + "년의 총인구는" + str(JHO_pop[JHO_year]["전국"]["총"]) + "명입니다."
     else:
         return str(JHO_year) + "년에는 데이터가 존재하지 않습니다."
+    
 # 1-2. 특정 연도의 전국 남성 추출 함수
+
 def JHO_year_m(JHO_year):
     #데이터 입력 오류 처리
     try:
@@ -206,16 +210,25 @@ def JHO_year_m(JHO_year):
         return str(JHO_year) + "년의 전국 남성 인구는" + str(JHO_pop[JHO_year]["전국"]["남성"]) +"명입니다."
     else:
         return str(JHO_year) + "년에는 데이터가 존재하지 않습니다."
+    
 # 1-3. 특정 연도의 전국 여성 추출 함수
+
 def JHO_year_w(JHO_year):
-    JHO_year = int(JHO_year)
+    try:
+        JHO_year = int(JHO_year)
+    except ValueError:
+        return "올바른 형식의 연도를 입력해야 합니다."
+
     if JHO_year in JHO_pop:
         return str(JHO_year) + "년의 전국 여성 인구는" + str(JHO_pop[JHO_year]["전국"]["여성"]) +"명입니다."
     else:
         return str(JHO_year) + "년에는 데이터가 존재하지 않습니다."
+    
 ########################################################################
 # 2. 특정 연도의 지역 인구 추출
+
 # 2-1. 특정 연도의 지역 총인구 추출 함수
+
 def JHO_year_area_total(JHO_year, JHO_area):
     try:
         JHO_year = int(JHO_year)
@@ -230,13 +243,16 @@ def JHO_year_area_total(JHO_year, JHO_area):
             return str(JHO_area)+"지역의 데이터가 존재하지 않습니다."
     else:
         return str(JHO_year)+"년 데이터가 존재하지 않습니다."
+    
 # 2-2. 특정 연도의 지역 남성 추출 함수
+
 def JHO_year_area_m(JHO_year, JHO_area):
     try:
         JHO_year = int(JHO_year)
         JHO_area = str(JHO_area)
     except ValueError:
         return "올바른 연도와 지역을 입력해야 합니다."
+    
     if JHO_year in JHO_pop:
         if JHO_area in JHO_pop[JHO_year]:
             return str(JHO_year)+"년"+str(JHO_area)+"의 남성인구는"+str(JHO_pop[JHO_year][JHO_area]["남성"])+"명입니다."
@@ -244,13 +260,16 @@ def JHO_year_area_m(JHO_year, JHO_area):
             return str(JHO_area)+"지역의 데이터가 존재하지 않습니다."
     else:
         return str(JHO_year)+"년 데이터가 존재하지 않습니다."
+    
 # 2-3. 특정 연도의 지역 여성 추출 함수
+
 def JHO_year_area_w(JHO_year, JHO_area):
     try:
         JHO_year = int(JHO_year)
         JHO_area = str(JHO_area)
     except ValueError:
         return "올바른 연도와 지역을 입력해야 합니다."
+    
     if JHO_year in JHO_pop:
         if JHO_area in JHO_pop[JHO_year]:
             return str(JHO_year)+"년"+str(JHO_area)+"의 여성인구는"+str(JHO_pop[JHO_year][JHO_area]["여성"])+"명입니다."
@@ -258,6 +277,7 @@ def JHO_year_area_w(JHO_year, JHO_area):
             return str(JHO_area)+"지역의 데이터가 존재하지 않습니다."
     else:
         return str(JHO_year)+"년 데이터가 존재하지 않습니다."
+    
 #######################################################################
 # 3. 특정 연도 최고,최저
 
@@ -295,34 +315,43 @@ def JHO_most_populous_region(JHY_year):
 
 #########################################################################
 # 4. 특정 지역의 9년간 평균 인구 계산
+
 # 4-1 특정 지역의 9년간 평균 총인구 계산
+
 def JHO_9_t(JHO_area):
     try:
         JHO_area = str(JHO_area)
     except ValueError:
         return "올바른 지역 형식이 아닙니다."
+    
     if JHO_area in JHO_pop[2015]:
         JHO_12 = sum(JHO_pop[year][JHO_area]["총"] for year in range(2015, 2024)) / 9
         return str(JHO_area) + "의 9년간 평균 총인구는 " + str(int(JHO_12)) + "명입니다."
     else:
         return str(JHO_area) + "의 데이터가 존재하지 않습니다."
+    
 # 4-2. 특정 지역의 9년간 평균 남성인구 계산
+
 def JHO_9_m(JHO_area):
     try:
         JHO_area = str(JHO_area)
     except ValueError:
         return "올바른 지역 형식이 아닙니다."
+    
     if JHO_area in JHO_pop[2015]:
         JHO_12 = sum(JHO_pop[year][JHO_area]["남성"] for year in range(2015, 2024)) / 9
         return str(JHO_area) + "의 9년간 평균 남성인구는 " + str(int(JHO_12)) + "명입니다."
     else:
         return str(JHO_area) + "의 데이터가 존재하지 않습니다."
+    
 # 4-3. 특정 지역의 9년간 평균 여성인구 계산
+
 def JHO_9_w(JHO_area):
     try:
         JHO_area = str(JHO_area)
     except ValueError:
         return "올바른 지역 형식이 아닙니다."
+    
     if JHO_area in JHO_pop[2015]:
         JHO_12 = sum(JHO_pop[year][JHO_area]["여성"] for year in range(2015, 2024)) / 9
         return str(JHO_area) + "의 9년간 평균 여성인구는 " + str(int(JHO_12)) + "명입니다."
@@ -333,7 +362,7 @@ def JHO_9_w(JHO_area):
 # 5. 연도별 인구 상위 5개 지역 출력
 
 # 5-1. 연도별 전체 인구 상위 5개 지역 출력
-def JHO_top5_t(JHY_year):
+def JHY_top5_t(JHY_year):
     try:
         JHY_year = int(JHY_year)
     except ValueError:
@@ -353,11 +382,13 @@ def JHO_top5_t(JHY_year):
 
 #########################################################################
 # 6. 특정 연도 지역의 성비
+
 def JHO_gender_ratio(JHO_year, JHO_area):
     try:
         JHO_year = int(JHO_year)
     except ValueError:
         return "올바른 형식의 연도를 입력해야 합니다."
+    
     if JHO_year in JHO_pop:
         if JHO_area in JHO_pop[JHO_year]:
             JHO_m = JHO_pop[JHO_year][JHO_area]["남성"]
@@ -373,38 +404,41 @@ def JHO_gender_ratio(JHO_year, JHO_area):
             return str(JHO_area)+"의 데이터가 존재하지 않습니다."
     else:
         return str(JHO_year)+"년의 데이터가 존재하지 않습니다."
+    
 #########################################################################
 # 7. 그래프
 
-# 7-1. 특정 연도의 지역별 인구 그래프
+# 7-1. 특정 연도의 지역별 총인구 그래프
 import turtle
-
-# 터틀 그래프로 바 차트 그리기 함수
 def JHO_year_graph(JHO_year):
-    # 터틀 초기화
-    screen = turtle.Screen()
-    screen.setup(width=1000, height=400)  # 화면 크기를 더 작게 설정
+    turtle.clearscreen()
+    turtle.penup()
+    turtle.home()
+
+    if JHO_year not in JHO_pop:
+        print("올바른 형식의 연도를 입력해주세요")
+        return
+    if 'screen' not in globals():
+        global screen
+        screen = turtle.Screen()
+        screen.setup(width=900, height=600)
+
     t = turtle.Turtle()
     t.speed(0)
-
-    # 그래프 기본 설정
     t.penup()
-    t.goto(-2000, -150)  # 시작 위치
+    t.goto(0, -150)
     t.pendown()
 
-    # 바 차트 그리기
-    bar_width = 30  # 바 너비를 작게 설정
-    spacing = 5  # 간격을 작게 설정
-    x_pos = -200
-    max_height = 40000000  # 최대 높이를 더 작은 값으로 설정 (비례적 스케일링)
+    bar_width = 40
+    spacing = 5
+    x_pos = -400
 
     for region, pop_data in JHO_pop[JHO_year].items():
+        if region == "전국":
+            continue
         population = pop_data["총"]
+        bar_height = (population / 50000)
 
-        # 바 높이 계산 (스케일을 더 낮춰서 그래프 크기를 줄임)
-        bar_height = (population / max_height) * 200  # 비례적 스케일링
-
-        # 바 그리기
         t.penup()
         t.goto(x_pos, -150)
         t.pendown()
@@ -418,26 +452,17 @@ def JHO_year_graph(JHO_year):
         t.forward(bar_height)
         t.end_fill()
 
-        # 지역명 표시
         t.penup()
-        t.goto(x_pos + bar_width / 2, -170)  # 지역명을 그래프 밑에 조금 더 가깝게 설정
+        t.goto(x_pos + bar_width / 2, -170)
         t.write(region, align="center")
 
-        # 다음 바로 이동
+        t.goto(x_pos + bar_width / 2, -150 + bar_height)  # 막대 위쪽으로 이동
+        t.write(population, align="center")  # 인구 수 표시
+
+
         x_pos += bar_width + spacing
 
-    # 터틀 숨기기
     t.hideturtle()
-    screen.mainloop()
-
-# 7-2. 특정 지역의 연도별 총인구 그래프
-
-# 7-3. 특정 지역의 연도별 남성인구 그래프
-
-# 7-4. 특정 지역의 연도별 여성인구 그래프
-
-# 7-5. 특정 연도의 지역별 총인구, 남성인구, 여성인구 그래프
-
 ##########################################################################
 # 시작메뉴
 def JHO_menu():
@@ -450,7 +475,7 @@ def JHO_menu():
         print("4. 특정 지역의 9년간 평균 인구 계산")
         print("5. 연도별 인구 상위 5개 지역 출력")
         print("6. 특정 연도 및 지역의 성비")
-        print("7. 그래프로 손쉽게 확인하기")
+        print("7. 그래프로 손쉽게 보기")
         print("8. 종료")
         JHO_cho = int(input("숫자를 입력하세요."))
         # 1번을 누를 시
@@ -494,19 +519,21 @@ def JHO_menu():
             else:
                 print("올바른 형식이 아닙니다.")
 
-
         # 5번을 누를 시
 
         # 6번을 누를 시
-        if JHO_cho == 7:
+        if JHO_cho ==6:
                 JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
                 JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등)")
                 print(JHO_gender_ratio(JHO_year, JHO_area))
 
         # 7번을 누를 시
-
+        if JHO_cho == 7:
+            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
+            JHO_year_graph(JHO_year)
+            
         # 8번을 누를 시
-        elif JHO_cho == 9:
+        elif JHO_cho == 8:
             print("이용해주셔서 감사합니다. 프로그램을 종료합니다.")
             break
         # 잘못된 번호를 누를 시
