@@ -296,7 +296,7 @@ def JHO_most_populous_region(JHY_year):
 #########################################################################
 # 4. 특정 지역의 9년간 평균 인구 계산
 # 4-1 특정 지역의 9년간 평균 총인구 계산
-def JHO_12_t(JHO_area):
+def JHO_9_t(JHO_area):
     try:
         JHO_area = str(JHO_area)
     except ValueError:
@@ -307,7 +307,7 @@ def JHO_12_t(JHO_area):
     else:
         return str(JHO_area) + "의 데이터가 존재하지 않습니다."
 # 4-2. 특정 지역의 9년간 평균 남성인구 계산
-def JHO_12_m(JHO_area):
+def JHO_9_m(JHO_area):
     try:
         JHO_area = str(JHO_area)
     except ValueError:
@@ -318,7 +318,7 @@ def JHO_12_m(JHO_area):
     else:
         return str(JHO_area) + "의 데이터가 존재하지 않습니다."
 # 4-3. 특정 지역의 9년간 평균 여성인구 계산
-def JHO_Everage_9year_woman(JHO_area):
+def JHO_9_w(JHO_area):
     try:
         JHO_area = str(JHO_area)
     except ValueError:
@@ -413,12 +413,12 @@ def JHO_menu():
         # 1번을 누를 시
         if JHO_cho == 1:
             JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2024)"))
-            JHO_cho_1 = input("전체, 남성, 여성 중에 선택해주세요.")
+            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요.")
             if JHO_cho_1 == "전체":
                 print(JHO_year_total(JHO_year))
-            elif JHO_cho_1 == "남성":
+            elif JHO_sel == "남성":
                 print(JHO_year_m(JHO_year))
-            elif JHO_cho_1 == "여성":
+            elif JHO_sel == "여성":
                 print(JHO_year_w(JHO_year))
             else:
                 print(JHO_cho_1+"은 확인할 수 없는 단어입니다.")
@@ -439,6 +439,18 @@ def JHO_menu():
         # 3번을 누를 시
 
         # 4번을 누를 시
+        if JHO_cho == 4:
+            JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등)")
+            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요.")
+            if JHO_sel =="전체":
+                print(JHO_9_t(JHO_area))
+            elif JHO_sel =="남성":
+                print(JHO_9_m(JHO_area))
+            elif JHO_sel =="여성":
+                print(JHO_9_w(JHO_area))
+            else:
+                print("올바른 형식이 아닙니다.")
+
 
         # 5번을 누를 시
 
