@@ -326,16 +326,76 @@ def JHO_most_male_population(JHY_year):
     else:
         return f"{JHY_year}년 데이터가 존재하지 않습니다."
 # 3-3. 특정 연도에 여성 인구가 가장 많은 지역
+def JHO_most_female_population(JHY_year):
+    JHY_year = int(JHY_year)  
+    if JHY_year in JHO_pop: 
+        def get_female_population(region):
+            return region[1]["여성"]  
+        JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=get_female_population, reverse=True)
+        if len(JHY_sorted_regions) > 0:
+            JHY_most_populous = JHY_sorted_regions[0]
+            return str(JHY_year) + "년의 여성 인구가 가장 많은 지역은 " + str(JHY_most_populous[0]) + "이고, 인구는 " + str(JHY_most_populous[1]["여성"]) + "명입니다."
+        else:
+            return str(JHY_year) + "년에는 데이터가 없습니다."
+    else:
+        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
 # 3-4. 특정 연도에 전체 인구가 가장 적은 지역
+def JHO_least_total_population(JHY_year):
+    JHY_year = int(JHY_year)
+    if JHY_year in JHO_pop: 
+        def get_total_population(region):
+            return region[1]["총"] 
+        JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=get_total_population)
+        if len(JHY_sorted_regions) > 0:
+            JHY_least_populous = JHY_sorted_regions[0]
+            return str(JHY_year) + "년의 전체 인구가 가장 적은 지역은 " + str(JHY_least_populous[0]) + "이고, 인구는 " + str(JHY_least_populous[1]["총"]) + "명입니다."
+        else:
+            return str(JHY_year) + "년에는 데이터가 없습니다."
+    else:
+        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
 # 3-5. 특정 연도에 남성 인구가 가장 적은 지역
+def JHO_least_male_population(JHY_year):
+    JHY_year = int(JHY_year)
+    if JHY_year in JHO_pop:
+        def get_male_population(region):
+            return region[1]["남성"]
+        JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=get_male_population)
+        if len(JHY_sorted_regions) > 0:
+            JHY_least_populous = JHY_sorted_regions[0]
+            return str(JHY_year) + "년의 남성 인구가 가장 적은 지역은 " + str(JHY_least_populous[0]) + "이고, 인구는 " + str(JHY_least_populous[1]["남성"]) + "명입니다."
+        else:
+            return str(JHY_year) + "년에는 데이터가 없습니다."
+    else:
+        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
 # 3-6. 특정 연도에 여성 인구가 가장 적은 지역
+def JHO_least_female_population(JHY_year):
+    JHY_year = int(JHY_year)  
+    if JHY_year in JHO_pop:  
+        def get_female_population(region):
+            return region[1]["여성"]  
+        JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=get_female_population)
+        if len(JHY_sorted_regions) > 0:
+            JHY_least_populous = JHY_sorted_regions[0]
+            return str(JHY_year) + "년의 여성 인구가 가장 적은 지역은 " + str(JHY_least_populous[0]) + "이고, 인구는 " + str(JHY_least_populous[1]["여성"]) + "명입니다."
+        else:
+            return str(JHY_year) + "년에는 데이터가 없습니다."
+    else:
+        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
 #########################################################################
 # 4. 특정 지역의 9년간 평균 인구 계산
-
+def JHO_9_avg_population(JHO_area, gender="총"):
+    if gender not in ["총", "남성", "여성"]:  
+        return "올바른 성별(총, 남성, 여성)을 선택해야 합니다."
+    
+    if JHO_area in JHO_pop[2015]:  
+        avg_population = sum([JHO_pop[year][JHO_area][gender] for year in range(2015, 2024)]) / 9
+        return str(JHO_area) + "의 9년간 평균 " + gender + " 인구는 " + str(int(avg_population)) + "명입니다."
+    else:
+        return str(JHO_area) + "의 데이터가 존재하지 않습니다."
 # 4-1 특정 지역의 9년간 평균 총인구 계산
 
 def JHO_9_t(JHO_area):
