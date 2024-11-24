@@ -592,14 +592,14 @@ def JHO_menu():
         if JHO_cho == 1:
             JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2024)"))
             JHO_sel = input("전체, 남성, 여성 중에 선택해주세요.")
-            if JHO_cho_1 == "전체":
+            if JHO_cho == "전체":
                 print(JHO_year_total(JHO_year))
             elif JHO_sel == "남성":
                 print(JHO_year_m(JHO_year))
             elif JHO_sel == "여성":
                 print(JHO_year_w(JHO_year))
             else:
-                print(JHO_cho_1+"은 확인할 수 없는 단어입니다.")
+                print(JHO_cho+"은 확인할 수 없는 단어입니다.")
         # 2번을 누를 시
         if JHO_cho == 2:
             JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
