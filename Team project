@@ -281,10 +281,11 @@ def JHO_year_area_w(JHO_year, JHO_area):
 #######################################################################
 # 3. 특정 연도 최고,최저
 
-# 3-1. 특정 연도에 전체 인구가 가장 많은 지역
-def JHO_most_populous_region(JHY_year):
+# 3-1. 특정 연도에 인구수 상위 순위 선택 출력
+def JHY_most_populous_region(JHY_year, JHY_rank):
     try:
         JHY_year = int(JHY_year)
+        JHY_rank <= 17
     except ValueError:
         return "올바른 형식의 연도를 입력해야 합니다."
     
@@ -293,21 +294,21 @@ def JHO_most_populous_region(JHY_year):
         # 해당 연도의 데이터를 가져와서 "총" 값을 기준으로 정렬
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=lambda x: x[1]["총"], reverse=True)
         
-        # 두 번째로 인구가 많은 지역을 선택 (리스트의 두 번째 항목)
+        #입력한 순위의 인구수, 지역 출력
         if len(JHY_sorted_regions) > 1:
-            JHY_second_populous = JHY_sorted_regions[2]
-            return f"{JHY_year}년의 가장 인구수가 많은 지역은 {JHY_second_populous[0]}이고, 인구는 {JHY_second_populous[1]['총']}명입니다."
+            JHY_second_populous = JHY_sorted_regions[JHY_rank]
+            return f"{JHY_year}년의 인구수{JHY_rank}번째로 많은 지역은 {JHY_second_populous[0]}이고, 인구는 {JHY_second_populous[1]['총']}명입니다."
         else:
-            return f"{JHY_year}년에는 남성 인구가 많은 지역이 없습니다."
+            return f"{JHY_year}년에는 데이터가 없습니다."
     else:
         return f"{JHY_year}년 데이터가 존재하지 않습니다."
-    #나중에 n번째 구하는 코드로 수정 가능
 
-# 3-2. 특정 연도에 남성 인구가 가장 많은 지역
-def JHO_most_male_population(JHY_year):
+# 3-2. 특정 연도에 남성 인구 상위 순위별 출력
+def JHY_most_male_population(JHY_year, JHY_rank):
     try:
         # 입력 연도를 정수로 변환
         JHY_year = int(JHY_year)
+        JHY_rank <= 17
     except ValueError:
         return "올바른 형식의 연도를 입력해야 합니다."
     
@@ -319,26 +320,35 @@ def JHO_most_male_population(JHY_year):
         
         # 두 번째로 인구가 많은 지역을 선택 (리스트의 두 번째 항목)
         if len(JHY_sorted_regions) > 1:
-            JHY_second_populous = JHY_sorted_regions[2]
-            return f"{JHY_year}년의 가장 남성이 많은 지역은 {JHY_second_populous[0]}이고, 인구는 {JHY_second_populous[1]['총']}명입니다."
+            JHY_second_populous = JHY_sorted_regions[JHY_rank]
+            return f"{JHY_year}년의 남성이 {JHY_rank}번째로 많은 지역은 {JHY_second_populous[0]}이고, 인구는 {JHY_second_populous[1]['남성']}명입니다."
         else:
-            return f"{JHY_year}년에는 가장 인구가 많은 지역이 없습니다."
+            return f"{JHY_year}년에는 데이터가 없습니다."
     else:
         return f"{JHY_year}년 데이터가 존재하지 않습니다."
-# 3-3. 특정 연도에 여성 인구가 가장 많은 지역
-def JHO_most_female_population(JHY_year):
-    JHY_year = int(JHY_year)  
-    if JHY_year in JHO_pop: 
-        def get_female_population(region):
-            return region[1]["여성"]  
-        JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=get_female_population, reverse=True)
-        if len(JHY_sorted_regions) > 0:
-            JHY_most_populous = JHY_sorted_regions[0]
-            return str(JHY_year) + "년의 여성 인구가 가장 많은 지역은 " + str(JHY_most_populous[0]) + "이고, 인구는 " + str(JHY_most_populous[1]["여성"]) + "명입니다."
+# 3-3. 특정 연도에 여성 인구 상위 순위 지역
+def JHY_most_female_population(JHY_year, JHY_rank):
+    try:
+        # 입력 연도를 정수로 변환
+        JHY_year = int(JHY_year)
+        JHY_rank <= 17
+    except ValueError:
+        return "올바른 형식의 연도를 입력해야 합니다."
+    
+    # 연도가 데이터에 존재하는지 확인
+    
+    if JHY_year in JHO_pop:
+        # 해당 연도의 데이터를 가져와서 "총" 값을 기준으로 정렬
+        JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=lambda x: x[1]["여성"], reverse=True)
+        
+        # 두 번째로 인구가 많은 지역을 선택 (리스트의 두 번째 항목)
+        if len(JHY_sorted_regions) > 1:
+            JHY_second_populous = JHY_sorted_regions[JHY_rank]
+            return f"{JHY_year}년의 여성이 {JHY_rank}번째로 많은 지역은 {JHY_second_populous[0]}이고, 인구는 {JHY_second_populous[1]['여성']}명입니다."
         else:
-            return str(JHY_year) + "년에는 데이터가 없습니다."
+            return f"{JHY_year}년에는 데이터가 없습니다."
     else:
-        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
+        return f"{JHY_year}년 데이터가 존재하지 않습니다."
 
 # 3-4. 특정 연도에 전체 인구가 가장 적은 지역
 def JHO_least_total_population(JHY_year):
@@ -619,21 +629,21 @@ def JHO_menu():
             JHY_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
             JHY_sel = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
             JHY_qua = input("인구 기준(많음/적음)을 입력하세요 >>> ")
-            
+            JHY_rank = int(input("몇번째 데이터를 원하는지 입력하세요 >>> "))
             if JHY_qua == "많음":
                 if JHY_sel == "전체":
-                    print(JHO_most_populous_region(JHO_year))
-                if JHY_sel == "남성":
-                    print(JHO_most_male_population(JHO_year))
-                if JHY_sel == "남성":
-                    print(JHO_most_female_population(JHO_year))
+                    print(JHY_most_populous_region(JHY_year, JHY_rank))
+                elif JHY_sel == "남성":
+                    print(JHY_most_male_population(JHY_year, JHY_rank))
+                elif JHY_sel == "여성":
+                    print(JHY_most_female_population(JHY_year, JHY_rank))
             elif JHY_qua == "적음":
                 if JHY_sel == "전체":
-                    print(JHO_least_total_population(JHO_year))
-                if JHY_sel == "남성":
-                    print(JHO_least_male_population(JHO_year))
-                if JHY_sel == "여성":
-                    print(JHO_least_female_population(JHO_year))
+                    print(JHO_least_total_population(JHY_year))
+                elif JHY_sel == "남성":
+                    print(JHO_least_male_population(JHY_year))
+                elif JHY_sel == "여성":
+                    print(JHO_least_female_population(JHY_year))
             else:
                 print("올바른 형식이 아닙니다")
 
