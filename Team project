@@ -615,7 +615,27 @@ def JHO_menu():
                 print("올바른 형식이 아닙니다.")
         
         # 3번을 누를 시
-
+        if JHO_cho == 3:
+            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
+            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요.")
+            JHY_qua = input("인구 기준(많음/적음)을 입력하세요")
+            
+            if JHY_qua == "많음":
+                if JHO_sel == "전체":
+                    print(JHO_most_populous_region(JHO_year))
+                if JHO_sel == "남성":
+                    print(JHO_most_male_population(JHO_year))
+                if JHO_sel == "남성":
+                    print(JHO_most_female_population(JHO_year))
+            elif JHY_qua == "적음":
+                if JHO_sel == "전체":
+                    print(JHO_least_total_population(JHO_year))
+                if JHO_sel == "남성":
+                    print(JHO_least_male_population(JHO_year))
+                if JHO_sel == "여성":
+                    print(JHO_least_female_population(JHO_year))
+            else:
+                print("올바른 형식이 아닙니다")
         # 4번을 누를 시
         if JHO_cho == 4:
             JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등)")
