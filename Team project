@@ -578,7 +578,7 @@ def JHO_year_graph(JHO_year):
 def JHO_menu():
     while True:
         print("본 프로그램은 2015 ~ 2023년까지의 한국 시도별 인구 데이터를 통계하는 프로그램입니다.")
-        print("원하시는 기능을 입력해주세요.")
+        print("원하시는 기능을 입력해주세요 >>> ")
         print("1. 특정 연도의 인구 추출")
         print("2. 특정 연도의 지역 인구 추출")
         print("3. 특정 연도의 최고 인구, 최저 인구")
@@ -587,11 +587,11 @@ def JHO_menu():
         print("6. 특정 연도 및 지역의 성비")
         print("7. 그래프로 연도별 지역 인구수 한눈에 보기")
         print("8. 종료")
-        JHO_cho = int(input("숫자를 입력하세요."))
+        JHO_cho = int(input("숫자를 입력하세요 >>> "))
         # 1번을 누를 시
         if JHO_cho == 1:
-            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2024)"))
-            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요.")
+            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2024) >>> "))
+            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요 >>> ")
             if JHO_cho == "전체":
                 print(JHO_year_total(JHO_year))
             elif JHO_sel == "남성":
@@ -602,9 +602,9 @@ def JHO_menu():
                 print(JHO_cho+"은 확인할 수 없는 단어입니다.")
         # 2번을 누를 시
         if JHO_cho == 2:
-            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
-            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요.")
-            JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등)")
+            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
+            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요 >>> ")
+            JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등) >>> ")
             if JHO_sel == "전체":
                 print(JHO_year_area_total(JHO_year, JHO_area))
             elif JHO_sel == "남성":
@@ -616,9 +616,9 @@ def JHO_menu():
         
         # 3번을 누를 시
         if JHO_cho == 3:
-            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
-            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요.")
-            JHY_qua = input("인구 기준(많음/적음)을 입력하세요")
+            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
+            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
+            JHY_qua = input("인구 기준(많음/적음)을 입력하세요 >>> ")
             
             if JHY_qua == "많음":
                 if JHO_sel == "전체":
@@ -636,10 +636,13 @@ def JHO_menu():
                     print(JHO_least_female_population(JHO_year))
             else:
                 print("올바른 형식이 아닙니다")
+
+
+
         # 4번을 누를 시
         if JHO_cho == 4:
-            JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등)")
-            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요.")
+            JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등) >>> ")
+            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
             if JHO_sel =="전체":
                 print(JHO_9_t(JHO_area))
             elif JHO_sel =="남성":
@@ -653,13 +656,13 @@ def JHO_menu():
 
         # 6번을 누를 시
         if JHO_cho ==6:
-                JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
+                JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
                 JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등)")
                 print(JHO_gender_ratio(JHO_year, JHO_area))
 
         # 7번을 누를 시
         if JHO_cho == 7:
-            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023)"))
+            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
             JHO_year_graph(JHO_year)
             
         # 8번을 누를 시
