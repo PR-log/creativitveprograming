@@ -397,15 +397,7 @@ def JHO_least_female_population(JHY_year, JHY_rank):
 
 #########################################################################
 # 4. 특정 지역의 9년간 평균 인구 계산
-def JHO_9_avg_population(JHO_area, gender="총"):
-    if gender not in ["총", "남성", "여성"]:  
-        return "올바른 성별(총, 남성, 여성)을 선택해야 합니다."
-    
-    if JHO_area in JHO_pop[2015]:  
-        avg_population = sum([JHO_pop[year][JHO_area][gender] for year in range(2015, 2024)]) / 9
-        return str(JHO_area) + "의 9년간 평균 " + gender + " 인구는 " + str(int(avg_population)) + "명입니다."
-    else:
-        return str(JHO_area) + "의 데이터가 존재하지 않습니다."
+
 # 4-1 특정 지역의 9년간 평균 총인구 계산
 
 def JHO_9_t(JHO_area):
@@ -589,8 +581,12 @@ def JHO_year_graph(JHO_year):
 # 시작메뉴
 def JHO_menu():
     while True:
+        print("")
+        print("")
+        print("")
         print("본 프로그램은 2015 ~ 2023년까지의 한국 시도별 인구 데이터를 통계하는 프로그램입니다.")
         print("원하시는 기능을 입력해주세요 >>> ")
+        print("")
         print("1. 특정 연도의 인구 추출")
         print("2. 특정 연도의 지역 인구 추출")
         print("3. 특정 연도의 상위, 하위 n번째 인구 출력")
@@ -599,6 +595,7 @@ def JHO_menu():
         print("6. 특정 연도 및 지역의 성비")
         print("7. 그래프로 연도별 지역 인구수 한눈에 보기")
         print("8. 종료")
+        print("")
         JHO_cho = int(input("숫자를 입력하세요 >>> "))
         # 1번을 누를 시
         if JHO_cho == 1:
