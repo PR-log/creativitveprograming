@@ -451,12 +451,12 @@ def JHY_top5_t(JHY_year):
             return data[1]["여성"]  
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_total_population, reverse=True)
         JHY_top5 = JHY_sorted_regions[:5]  # 상위 5개 지역 추출
-        result = str(JHY_year) + "년의 전체 인구 상위 5개 지역:\n"
-        index = 1
+        JHY_result = str(JHY_year) + "년의 전체 인구 상위 5개 지역:\n"
+        JHY_index = 1
         for data in JHY_top5:
-            result = result + str(index) + ". " + data[0] + ": " + str(data[1]["총"]) + "명\n"
-            index = index + 1
-        return result[:-1]  # 마지막 줄바꿈 제거
+            JHY_result = JHY_result + str(JHY_index) + ". " + data[0] + ": " + str(data[1]["총"]) + "명\n"
+            JHY_index = JHY_index + 1
+        return JHY_result[:-1]  # 마지막 줄바꿈 제거
     else:
         return str(JHY_year) + "년 데이터가 존재하지 않습니다."   
         
@@ -468,12 +468,12 @@ def JHO_top5_male(JHY_year):
             return data[1]["남성"] 
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_male_population, reverse=True)
         JHY_top5 = JHY_sorted_regions[:5]  # 상위 5개 지역 추출
-        result = str(JHY_year) + "년의 남성 인구 상위 5개 지역:\n"
-        index = 1
+        JHY_result = str(JHY_year) + "년의 남성 인구 상위 5개 지역:\n"
+        JHY_index = 1
         for data in JHY_top5:
-            result = result + str(index) + ". " + data[0] + ": " + str(data[1]["남성"]) + "명\n"
-            index = index + 1
-        return result[:-1]  # 마지막 줄바꿈 제거
+            JHY_result = JHY_result + str(JHY_index) + ". " + data[0] + ": " + str(data[1]["남성"]) + "명\n"
+            JHY_index = JHY_index + 1
+        return JHY_result[:-1]  # 마지막 줄바꿈 제거
     else:
         return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
@@ -485,12 +485,12 @@ def JHO_top5_female(JHY_year):
             return data[1]["여성"]  
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_female_population, reverse=True)
         JHY_top5 = JHY_sorted_regions[:5]  # 상위 5개 지역 추출
-        result = str(JHY_year) + "년의 여성 인구 상위 5개 지역:\n"
-        index = 1
+        JHY_result = str(JHY_year) + "년의 여성 인구 상위 5개 지역:\n"
+        JHY_index = 1
         for data in JHY_top5:
-            result = result + str(index) + ". " + data[0] + ": " + str(data[1]["여성"]) + "명\n"
-            index = index + 1
-        return result[:-1]  # 마지막 줄바꿈 제거
+            JHY_result = JHY_result + str(JHY_index) + ". " + data[0] + ": " + str(data[1]["여성"]) + "명\n"
+            JHY_index = JHY_index + 1
+        return JHY_result[:-1]  # 마지막 줄바꿈 제거
     else:
         return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
