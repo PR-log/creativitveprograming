@@ -348,46 +348,22 @@ def JHO_least_female_population(JHY_year, JHY_rank):
 # 4. 특정 지역의 9년간 평균 인구 계산
 
 # 4-1 특정 지역의 9년간 평균 총인구 계산
-
 def JHO_9_t(JHO_area):
-    try:
-        JHO_area = str(JHO_area)
-    except ValueError:
-        return "올바른 지역 형식이 아닙니다."
-    
     if JHO_area in JHO_pop[2015]:
         JHO_12 = sum(JHO_pop[JHO_year][JHO_area]["총"] for JHO_year in range(2015, 2024)) / 9
         return str(JHO_area) + "의 9년간 평균 총인구는 " + str(int(JHO_12)) + "명입니다."
-    else:
-        return str(JHO_area) + "의 데이터가 존재하지 않습니다."
     
 # 4-2. 특정 지역의 9년간 평균 남성인구 계산
-
 def JHO_9_m(JHO_area):
-    try:
-        JHO_area = str(JHO_area)
-    except ValueError:
-        return "올바른 지역 형식이 아닙니다."
-    
     if JHO_area in JHO_pop[2015]:
         JHO_12 = sum(JHO_pop[JHO_year][JHO_area]["남성"] for JHO_year in range(2015, 2024)) / 9
         return str(JHO_area) + "의 9년간 평균 남성인구는 " + str(int(JHO_12)) + "명입니다."
-    else:
-        return str(JHO_area) + "의 데이터가 존재하지 않습니다."
     
 # 4-3. 특정 지역의 9년간 평균 여성인구 계산
-
 def JHO_9_w(JHO_area):
-    try:
-        JHO_area = str(JHO_area)
-    except ValueError:
-        return "올바른 지역 형식이 아닙니다."
-    
     if JHO_area in JHO_pop[2015]:
         JHO_12 = sum(JHO_pop[JHO_year][JHO_area]["여성"] for JHO_year in range(2015, 2024)) / 9
         return str(JHO_area) + "의 9년간 평균 여성인구는 " + str(int(JHO_12)) + "명입니다."
-    else:
-        return str(JHO_area) + "의 데이터가 존재하지 않습니다."
 
 #########################################################################
 # 5. 연도별 인구 상위 5개 지역 출력
@@ -405,9 +381,7 @@ def JHY_top5_t(JHY_year):
         for JHY_data in JHY_top5:
             JHY_result = JHY_result + str(JHY_index) + ". " + JHY_data[0] + ": " + str(JHY_data[1]["총"]) + "명\n"
             JHY_index = JHY_index + 1
-        return JHY_result[:-1]  # 마지막 줄바꿈 제거
-    else:
-        return str(JHY_year) + "년 데이터가 존재하지 않습니다."   
+        return JHY_result[:-1]  # 마지막 줄바꿈 제거 
         
 # 5-2. 연도별 남성 인구 상위 5개 지역 출력
 def JHO_top5_male(JHY_year):
@@ -423,8 +397,6 @@ def JHO_top5_male(JHY_year):
             JHY_result = JHY_result + str(JHY_index) + ". " + JHY_data[0] + ": " + str(JHY_data[1]["남성"]) + "명\n"
             JHY_index = JHY_index + 1
         return JHY_result[:-1]  # 마지막 줄바꿈 제거
-    else:
-        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
 # 5-3. 연도별 여성 인구 상위 5개 지역 출력
 def JHO_top5_female(JHY_year):
@@ -440,33 +412,20 @@ def JHO_top5_female(JHY_year):
             JHY_result = JHY_result + str(JHY_index) + ". " + JHY_data[0] + ": " + str(JHY_data[1]["여성"]) + "명\n"
             JHY_index = JHY_index + 1
         return JHY_result[:-1]  # 마지막 줄바꿈 제거
-    else:
-        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
 #########################################################################
 # 6. 특정 연도 지역의 성비
 
 def JHO_gender_ratio(JHO_year, JHO_area):
-    try:
-        JHO_year = int(JHO_year)
-    except ValueError:
-        return "올바른 형식의 연도를 입력해야 합니다."
-    
     if JHO_year in JHO_pop:
         if JHO_area in JHO_pop[JHO_year]:
             JHO_m = JHO_pop[JHO_year][JHO_area]["남성"]
             JHO_w = JHO_pop[JHO_year][JHO_area]["여성"]
             JHO_t = JHO_m + JHO_w
-            if JHO_t == 0:
-                return str(JHO_year)+"년"+str(JHO_area)+"의 인구가 0명입니다."
             JHO_m_ratio = (JHO_m / JHO_t) * 100
             JHO_w_ratio = (JHO_w / JHO_t) * 100
 
-            return str(JHO_year)+"년"+str(JHO_area)+"의 남성 비율은 "+str(JHO_m_ratio)+"%, 여성 비율은 "+str(JHO_w_ratio)+"%입니다."
-        else:
-            return str(JHO_area)+"의 데이터가 존재하지 않습니다."
-    else:
-        return str(JHO_year)+"년의 데이터가 존재하지 않습니다."
+            return str(JHO_year)+"년 "+str(JHO_area)+"의 남성 비율은 "+str(JHO_m_ratio)+"%, 여성 비율은 "+str(JHO_w_ratio)+"%입니다."
     
 #########################################################################
 # 7. 특정 연도의 지역별 총인구 그래프
@@ -475,16 +434,8 @@ import turtle
 def JHO_year_graph(JHO_year):
     turtle.clearscreen()
     turtle.penup()
-    turtle.home()
-
-    if JHO_year not in JHO_pop:
-        print("올바른 형식의 연도를 입력해주세요")
-        return
-    if 'screen' not in globals():
-        global JHO_screen
-        JHO_screen = turtle.Screen()
-        JHO_screen.setup(width=900, height=600)
-
+    JHO_screen = turtle.Screen()
+    JHO_screen.setup(width=900, height=600)
     JHO = turtle.Turtle()
     JHO.speed(0)
     JHO.penup()
@@ -519,6 +470,7 @@ def JHO_year_graph(JHO_year):
         JHO_x += JHO_width + JHO_space
 
     JHO.hideturtle()
+
 ##########################################################################
 # 시작메뉴
 def JHO_menu():
@@ -536,7 +488,7 @@ def JHO_menu():
         print("2. 특정 연도의 지역 인구 추출")
         print("3. 특정 연도의 상위/하위 n번째 인구 출력")
         print("4. 특정 지역의 9년간 평균 인구 계산")
-        print("5. 연도별 인구 상위 5개 지역 출력")
+        print("5. 특정 연도의 인구 상위 5개 지역 출력")
         print("6. 특정 연도 및 지역의 성비 계산")
         print("7. 그래프로 연도별 지역 인구수 한눈에 보기")
         print("8. 종료")
@@ -613,39 +565,65 @@ def JHO_menu():
         # 4번을 누를 시
         elif JHO_cho == 4:
             JHO_area = input("지역을 입력해주세요. >>> ")
-            JHO_sel = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
-            if JHO_sel =="전체":
-                print(JHO_9_t(JHO_area))
-            elif JHO_sel =="남성":
-                print(JHO_9_m(JHO_area))
-            elif JHO_sel =="여성":
-                print(JHO_9_w(JHO_area))
+            if JHO_area in JHO_t_area:
+                JHO_sel = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
+                if JHO_sel =="전체":
+                    print(JHO_9_t(JHO_area))
+                elif JHO_sel =="남성":
+                    print(JHO_9_m(JHO_area))
+                elif JHO_sel =="여성":
+                    print(JHO_9_w(JHO_area))
+                else:
+                    print("올바른 형식이 아닙니다. 전체, 남성, 여성 중에 입력해주세요.")
             else:
-                print("올바른 형식이 아닙니다.")
-
+                print("올바른 형식의 지역을 입력해야합니다. 다시 입력해주세요.")
         # 5번을 누를 시
         elif JHO_cho == 5:
-            JHY_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
-            JHY_sex = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
-            if JHY_sex == "전체":
-                print(JHY_top5_t(JHY_year))
-            elif JHY_sex == "남성":
-                print(JHO_top5_male(JHY_year))
-            elif JHY_sex == "여성":
-                print(JHO_top5_female(JHY_year))
+            try:
+                JHY_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
+            except ValueError:
+                print("올바른 형식의 연도를 입력해야 합니다. 숫자로 입력해주세요.")
             else:
-                print("올바른 형식이 아닙니다.")  
-                    
+                if 2015 <= JHY_year <= 2023:
+                    JHY_sex = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
+                    if JHY_sex == "전체":
+                        print(JHY_top5_t(JHY_year))
+                    elif JHY_sex == "남성":
+                        print(JHO_top5_male(JHY_year))
+                    elif JHY_sex == "여성":
+                        print(JHO_top5_female(JHY_year))
+                    else:
+                        print("올바른 형식이 아닙니다. 전체, 남성, 여성 중에 입력해주세요.")
+                else:
+                    print("2015 ~ 2023 사이의 값을 입력해주세요.")
+
         # 6번을 누를 시
         elif JHO_cho ==6:
-            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
-            JHO_area = input("지역을 입력해주세요.>>> ")
-            print(JHO_gender_ratio(JHO_year, JHO_area))
+            try:
+                JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
+            except ValueError:
+                print("올바른 형식의 연도를 입력해야 합니다. 숫자로 입력해주세요.")
+            else:
+                if 2015 <= JHO_year <= 2023:
+                    JHO_area = input("지역을 입력해주세요.>>> ")
+                    if JHO_area in JHO_t_area:
+                        print(JHO_gender_ratio(JHO_year, JHO_area))
+                    else:
+                        print("올바른 형식의 지역을 입력해야합니다. 다시 입력해주세요.")
+                else:
+                    print("2015 ~ 2023 사이의 값을 입력해주세요.")
 
         # 7번을 누를 시
         elif JHO_cho == 7:
-            JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
-            JHO_year_graph(JHO_year)
+            try:
+                JHO_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
+            except ValueError:
+                print("올바른 형식의 연도를 입력해야 합니다. 숫자로 입력해주세요.")
+            else:
+                if 2015<= JHO_year <=2023:
+                    JHO_year_graph(JHO_year)
+                else:
+                    print("2015 ~ 2023 사이의 값을 입력해주세요.")
             
         # 8번을 누를 시
         elif JHO_cho == 8:
@@ -655,3 +633,4 @@ def JHO_menu():
         else:
             print("잘못된 입력입니다. 다시 작성해주세요.")
 JHO_menu()
+# 3
