@@ -228,16 +228,10 @@ def JHO_year_area_w(JHO_year, JHO_area):
             return str(JHO_year)+"년 "+str(JHO_area)+"의 여성 인구는 "+str(JHO_pop[JHO_year][JHO_area]["여성"])+"명입니다."
 
 #######################################################################
-# 3. 특정 연도 최고,최저
+# 3. 특정 연도 인구수 순위
 
 # 3-1. 특정 연도에 인구수 상위 순위 선택 출력
 def JHY_most_populous_region(JHY_year, JHY_rank):
-    try:
-        JHY_year = int(JHY_year)
-        JHY_rank <= 17
-    except ValueError:
-        return "올바른 형식의 연도를 입력해야 합니다."
-    
     # 연도가 데이터에 존재하는지 확인
     if JHY_year in JHO_pop:
         # 해당 연도의 데이터를 가져와서 "총" 값을 기준으로 정렬
@@ -247,22 +241,10 @@ def JHY_most_populous_region(JHY_year, JHY_rank):
         if len(JHY_sorted_regions) > 1:
             JHY_second_populous = JHY_sorted_regions[JHY_rank]
             return f"{JHY_year}년의 인구가 {JHY_rank}번째로 많은 지역은 {JHY_second_populous[0]}이고, 인구는 {JHY_second_populous[1]['총']}명입니다."
-        else:
-            return f"{JHY_year}년에는 데이터가 없습니다."
-    else:
-        return f"{JHY_year}년 데이터가 존재하지 않습니다."
 
 # 3-2. 특정 연도에 남성 인구 상위 순위별 출력
 def JHY_most_male_population(JHY_year, JHY_rank):
-    try:
-        # 입력 연도를 정수로 변환
-        JHY_year = int(JHY_year)
-        JHY_rank <= 17
-    except ValueError:
-        return "올바른 형식의 연도를 입력해야 합니다."
-    
     # 연도가 데이터에 존재하는지 확인
-    
     if JHY_year in JHO_pop:
         # 해당 연도의 데이터를 가져와서 "총" 값을 기준으로 정렬
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=lambda x: x[1]["남성"], reverse=True)
@@ -271,21 +253,10 @@ def JHY_most_male_population(JHY_year, JHY_rank):
         if len(JHY_sorted_regions) > 1:
             JHY_second_populous = JHY_sorted_regions[JHY_rank]
             return f"{JHY_year}년의 남성이 {JHY_rank}번째로 많은 지역은 {JHY_second_populous[0]}이고, 인구는 {JHY_second_populous[1]['남성']}명입니다."
-        else:
-            return f"{JHY_year}년에는 데이터가 없습니다."
-    else:
-        return f"{JHY_year}년 데이터가 존재하지 않습니다."
+
 # 3-3. 특정 연도에 여성 인구 상위 순위 지역
 def JHY_most_female_population(JHY_year, JHY_rank):
-    try:
-        # 입력 연도를 정수로 변환
-        JHY_year = int(JHY_year)
-        JHY_rank <= 17
-    except ValueError:
-        return "올바른 형식의 연도를 입력해야 합니다."
-    
     # 연도가 데이터에 존재하는지 확인
-    
     if JHY_year in JHO_pop:
         # 해당 연도의 데이터를 가져와서 "총" 값을 기준으로 정렬
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=lambda x: x[1]["여성"], reverse=True)
@@ -294,55 +265,6 @@ def JHY_most_female_population(JHY_year, JHY_rank):
         if len(JHY_sorted_regions) > 1:
             JHY_second_populous = JHY_sorted_regions[JHY_rank]
             return f"{JHY_year}년의 여성이 {JHY_rank}번째로 많은 지역은 {JHY_second_populous[0]}이고, 인구는 {JHY_second_populous[1]['여성']}명입니다."
-        else:
-            return f"{JHY_year}년에는 데이터가 없습니다."
-    else:
-        return f"{JHY_year}년 데이터가 존재하지 않습니다."
-
-# 3-4. 특정 연도에 전체 인구가 n번째 적은 지역
-def JHO_least_total_population(JHY_year, JHY_rank):
-    JHY_year = int(JHY_year)
-    if JHY_year in JHO_pop: 
-        def JHY_get_total_population(region):
-            return region[1]["총"] 
-        JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_total_population)
-        if len(JHY_sorted_regions) > 0:
-            JHY_least_populous = JHY_sorted_regions[JHY_rank]
-            return f"{JHY_year}년의 인구가 {JHY_rank}번째로 적은 지역은 {JHY_least_populous[0]}이고, 인구는 {JHY_least_populous[1]['총']}명입니다."
-        else:
-            return str(JHY_year) + "년에는 데이터가 없습니다."
-    else:
-        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
-
-# 3-5. 특정 연도에 남성 인구가 n번째 적은 지역
-def JHO_least_male_population(JHY_year, JHY_rank):
-    JHY_year = int(JHY_year)
-    if JHY_year in JHO_pop:
-        def JHY_get_male_population(region):
-            return region[1]["남성"]
-        JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_male_population)
-        if len(JHY_sorted_regions) > 0:
-            JHY_least_populous = JHY_sorted_regions[JHY_rank]
-            return str(JHY_year) + "년의 남성 인구가 ", JHY_rank, "번째로 적은 지역은 " + str(JHY_least_populous[0]) + "이고, 인구는 " + str(JHY_least_populous[1]["남성"]) + "명입니다."
-        else:
-            return str(JHY_year) + "년에는 데이터가 없습니다."
-    else:
-        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
-
-# 3-6. 특정 연도에 여성 인구가 n번째 적은 지역
-def JHO_least_female_population(JHY_year, JHY_rank):
-    JHY_year = int(JHY_year)  
-    if JHY_year in JHO_pop:  
-        def JHY_get_female_population(region):
-            return region[1]["여성"]  
-        JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_female_population)
-        if len(JHY_sorted_regions) > 0:
-            JHY_least_populous = JHY_sorted_regions[JHY_rank]
-            return f"{JHY_year}년의 인구가 {JHY_rank}번째로 적은 지역은 {JHY_least_populous[0]}이고, 인구는 {JHY_least_populous[1]['여성']}명입니다."
-        else:
-            return str(JHY_year) + "년에는 데이터가 없습니다."
-    else:
-        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
 #########################################################################
 # 4. 특정 지역의 9년간 평균 인구 계산
@@ -429,32 +351,30 @@ def JHO_gender_ratio(JHO_year, JHO_area):
     
 #########################################################################
 # 7. 특정 연도의 지역별 총인구 그래프
-
 import turtle
+
 def JHO_year_graph(JHO_year):
     turtle.clearscreen()
-    turtle.penup()
     JHO_screen = turtle.Screen()
     JHO_screen.setup(width=900, height=600)
     JHO = turtle.Turtle()
     JHO.speed(0)
-    JHO.penup()
-    JHO.goto(0, -150)
-    JHO.pendown()
-    JHO_width = 40 # 막대의 너비
-    JHO_space = 5 # 막대간 간격
-    JHO_x = -400 # 현재 막대의 x좌표
+    JHO.hideturtle()
+    JHO_width, JHO_space, JHO_x = 40, 5, -400 # 막대의 너비, 막대간 간격, 현재 막대 x좌표
 
     for JHO_area, JHO_data in JHO_pop[JHO_year].items():
         if JHO_area == "전국":
             continue
         JHO_per = JHO_data["총"]
-        JHO_height = (JHO_per / 50000)
+        JHO_height = JHO_per / 50000
+
+        # 막대 그리기
+        JHO.fillcolor("black")
         JHO.penup()
         JHO.goto(JHO_x, -150)
         JHO.pendown()
         JHO.begin_fill()
-        JHO.fillcolor("black")
+        
         JHO.setheading(90)
         JHO.forward(JHO_height)
         JHO.right(90)
@@ -462,15 +382,15 @@ def JHO_year_graph(JHO_year):
         JHO.right(90)
         JHO.forward(JHO_height)
         JHO.end_fill()
+
+        # 텍스트 작성
         JHO.penup()
         JHO.goto(JHO_x + JHO_width / 2, -170)
         JHO.write(JHO_area, align="center")
         JHO.goto(JHO_x + JHO_width / 2, -150 + JHO_height)  # 막대 위쪽으로 이동
         JHO.write(JHO_per, align="center")  # 인구 수 표시
         JHO_x += JHO_width + JHO_space
-
-    JHO.hideturtle()
-
+        
 ##########################################################################
 # 시작메뉴
 def JHO_menu():
@@ -486,7 +406,7 @@ def JHO_menu():
         print("원하시는 기능을 선택해주세요:")
         print("1. 특정 연도의 인구 추출")
         print("2. 특정 연도의 지역 인구 추출")
-        print("3. 특정 연도의 상위/하위 n번째 인구 출력")
+        print("3. 특정 연도의 상위 n번째 인구 출력")
         print("4. 특정 지역의 9년간 평균 인구 계산")
         print("5. 특정 연도의 인구 상위 5개 지역 출력")
         print("6. 특정 연도 및 지역의 성비 계산")
@@ -541,26 +461,31 @@ def JHO_menu():
 
         # 3번을 누를 시
         elif JHO_cho == 3:
-            JHY_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
-            JHY_sel = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
-            JHY_qua = input("인구 기준(많음/적음)을 입력하세요. >>> ")
-            JHY_rank = int(input("몇번째 데이터를 원하는지 입력하세요. >>> "))
-            if JHY_qua == "많음":
-                if JHY_sel == "전체":
-                    print(JHY_most_populous_region(JHY_year, JHY_rank))
-                elif JHY_sel == "남성":
-                    print(JHY_most_male_population(JHY_year, JHY_rank))
-                elif JHY_sel == "여성":
-                    print(JHY_most_female_population(JHY_year, JHY_rank))
-            elif JHY_qua == "적음":
-                if JHY_sel == "전체":
-                    print(JHO_least_total_population(JHY_year,JHY_rank))
-                elif JHY_sel == "남성":
-                    print(JHO_least_male_population(JHY_year, JHY_rank))
-                elif JHY_sel == "여성":
-                    print(JHO_least_female_population(JHY_year, JHY_rank))
-            else:
-                print("올바른 형식이 아닙니다")
+                try:
+                    JHY_year = int(input("연도를 입력해주세요. (2015 ~ 2023) >>> "))
+                except ValueError:
+                    print("올바른 형식의 연도를 입력해야 합니다. 숫자로 입력해주세요.")
+                else:
+                    if 2015 <= JHY_year <= 2023:
+                        try:
+                            JHY_rank = int(input("몇번째 데이터를 원하는지 입력하세요. (1 ~ 17) >>> "))
+                        except ValueError:
+                            print("올바른 형식이 아닙니다. 숫자로 입력해주세요.")
+                        else:
+                            if JHY_rank <= 17:
+                                JHY_sel = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
+                                if JHY_sel == "전체":
+                                    print(JHY_most_populous_region(JHY_year, JHY_rank))
+                                elif JHY_sel == "남성":
+                                    print(JHY_most_male_population(JHY_year, JHY_rank))
+                                elif JHY_sel == "여성":
+                                    print(JHY_most_female_population(JHY_year, JHY_rank))
+                                else:
+                                    print("올바른 형식이 아닙니다. 전체, 남성, 여성 중에 입력해주세요.")
+                            else:
+                                print("1~17까지 입력할 수 있습니다. 다시 입력해주세요.")
+                    else:
+                        print("2015 ~ 2023 사이의 값을 입력해주세요.")
 
         # 4번을 누를 시
         elif JHO_cho == 4:
@@ -633,4 +558,3 @@ def JHO_menu():
         else:
             print("잘못된 입력입니다. 다시 작성해주세요.")
 JHO_menu()
-# 3
