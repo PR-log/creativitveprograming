@@ -327,18 +327,28 @@ def JHY_most_male_population(JHY_year, JHY_rank):
     else:
         return f"{JHY_year}년 데이터가 존재하지 않습니다."
 # 3-3. 특정 연도에 여성 인구 상위 순위 지역
-def JHO_most_female_population(JHY_year):
-    JHY_year = int(JHY_year)  
-    if JHY_year in JHO_pop:  # 연도 데이터 존재 여부 확인
+def JHY_most_female_population(JHY_year, JHY_rank):
+    try:
+        # 입력 연도를 정수로 변환
+        JHY_year = int(JHY_year)
+        JHY_rank <= 17
+    except ValueError:
+        return "올바른 형식의 연도를 입력해야 합니다."
+    
+    # 연도가 데이터에 존재하는지 확인
+    
+    if JHY_year in JHO_pop:
+        # 해당 연도의 데이터를 가져와서 "총" 값을 기준으로 정렬
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=lambda x: x[1]["여성"], reverse=True)
-        if len(JHY_sorted_regions) > 0:
-            JHY_most_populous = JHY_sorted_regions[0]
-            return str(JHY_year) + "년의 여성 인구가 가장 많은 지역은 " + str(JHY_most_populous[0]) + "이고, 인구는 " + str(JHY_most_populous[1]["여성"]) + "명입니다."
+        
+        # 두 번째로 인구가 많은 지역을 선택 (리스트의 두 번째 항목)
+        if len(JHY_sorted_regions) > 1:
+            JHY_second_populous = JHY_sorted_regions[JHY_rank]
+            return f"{JHY_year}년의 여성이 {JHY_rank}번째로 많은 지역은 {JHY_second_populous[0]}이고, 인구는 {JHY_second_populous[1]['여성']}명입니다."
         else:
-            return str(JHY_year) + "년에는 데이터가 없습니다."
+            return f"{JHY_year}년에는 데이터가 없습니다."
     else:
-        return str(JHY_year) + "년 데이터가 존재하지 않습니다."
-
+        return f"{JHY_year}년 데이터가 존재하지 않습니다."
 
 # 3-4. 특정 연도에 전체 인구가 n번째 적은 지역
 def JHO_least_total_population(JHY_year, JHY_rank):
@@ -397,7 +407,7 @@ def JHO_9_t(JHO_area):
         return "올바른 지역 형식이 아닙니다."
     
     if JHO_area in JHO_pop[2015]:
-        JHO_12 = sum(JHO_pop[year][JHO_area]["총"] for year in range(2015, 2024)) / 9
+        JHO_12 = sum(JHO_pop[JHO_year][JHO_area]["총"] for JHO_year in range(2015, 2024)) / 9
         return str(JHO_area) + "의 9년간 평균 총인구는 " + str(int(JHO_12)) + "명입니다."
     else:
         return str(JHO_area) + "의 데이터가 존재하지 않습니다."
@@ -411,7 +421,7 @@ def JHO_9_m(JHO_area):
         return "올바른 지역 형식이 아닙니다."
     
     if JHO_area in JHO_pop[2015]:
-        JHO_12 = sum(JHO_pop[year][JHO_area]["남성"] for year in range(2015, 2024)) / 9
+        JHO_12 = sum(JHO_pop[JHO_year][JHO_area]["남성"] for JHO_year in range(2015, 2024)) / 9
         return str(JHO_area) + "의 9년간 평균 남성인구는 " + str(int(JHO_12)) + "명입니다."
     else:
         return str(JHO_area) + "의 데이터가 존재하지 않습니다."
@@ -425,7 +435,7 @@ def JHO_9_w(JHO_area):
         return "올바른 지역 형식이 아닙니다."
     
     if JHO_area in JHO_pop[2015]:
-        JHO_12 = sum(JHO_pop[year][JHO_area]["여성"] for year in range(2015, 2024)) / 9
+        JHO_12 = sum(JHO_pop[JHO_year][JHO_area]["여성"] for JHO_year in range(2015, 2024)) / 9
         return str(JHO_area) + "의 9년간 평균 여성인구는 " + str(int(JHO_12)) + "명입니다."
     else:
         return str(JHO_area) + "의 데이터가 존재하지 않습니다."
@@ -437,16 +447,16 @@ def JHO_9_w(JHO_area):
 def JHY_top5_t(JHY_year):
     JHY_year = int(JHY_year)  
     if JHY_year in JHO_pop:  
-        def JHY_get_total_population(data):
-            return data[1]["여성"]  
+        def JHY_get_total_population(JHO_data):
+            return JHO_data[1]["여성"]  
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_total_population, reverse=True)
         JHY_top5 = JHY_sorted_regions[:5]  # 상위 5개 지역 추출
-        result = str(JHY_year) + "년의 전체 인구 상위 5개 지역:\n"
-        index = 1
-        for data in JHY_top5:
-            result = result + str(index) + ". " + data[0] + ": " + str(data[1]["총"]) + "명\n"
-            index = index + 1
-        return result[:-1]  # 마지막 줄바꿈 제거
+        JHY_result = str(JHY_year) + "년의 전체 인구 상위 5개 지역:\n"
+        JHY_index = 1
+        for JHY_data in JHY_top5:
+            JHY_result = JHY_result + str(JHY_index) + ". " + JHY_data[0] + ": " + str(JHY_data[1]["총"]) + "명\n"
+            JHY_index = JHY_index + 1
+        return JHY_result[:-1]  # 마지막 줄바꿈 제거
     else:
         return str(JHY_year) + "년 데이터가 존재하지 않습니다."   
         
@@ -454,16 +464,16 @@ def JHY_top5_t(JHY_year):
 def JHO_top5_male(JHY_year):
     JHY_year = int(JHY_year)  
     if JHY_year in JHO_pop:  
-        def JHY_get_male_population(data):
-            return data[1]["남성"] 
+        def JHY_get_male_population(JHO_data):
+            return JHO_data[1]["남성"] 
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_male_population, reverse=True)
         JHY_top5 = JHY_sorted_regions[:5]  # 상위 5개 지역 추출
-        result = str(JHY_year) + "년의 남성 인구 상위 5개 지역:\n"
-        index = 1
-        for data in JHY_top5:
-            result = result + str(index) + ". " + data[0] + ": " + str(data[1]["남성"]) + "명\n"
-            index = index + 1
-        return result[:-1]  # 마지막 줄바꿈 제거
+        JHY_result = str(JHY_year) + "년의 남성 인구 상위 5개 지역:\n"
+        JHY_index = 1
+        for JHY_data in JHY_top5:
+            JHY_result = JHY_result + str(JHY_index) + ". " + JHY_data[0] + ": " + str(JHY_data[1]["남성"]) + "명\n"
+            JHY_index = JHY_index + 1
+        return JHY_result[:-1]  # 마지막 줄바꿈 제거
     else:
         return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
@@ -471,16 +481,16 @@ def JHO_top5_male(JHY_year):
 def JHO_top5_female(JHY_year):
     JHY_year = int(JHY_year)  
     if JHY_year in JHO_pop:  
-        def JHY_get_female_population(data):
-            return data[1]["여성"]  
+        def JHY_get_female_population(JHO_data):
+            return JHO_data[1]["여성"]  
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_female_population, reverse=True)
         JHY_top5 = JHY_sorted_regions[:5]  # 상위 5개 지역 추출
-        result = str(JHY_year) + "년의 여성 인구 상위 5개 지역:\n"
-        index = 1
-        for data in JHY_top5:
-            result = result + str(index) + ". " + data[0] + ": " + str(data[1]["여성"]) + "명\n"
-            index = index + 1
-        return result[:-1]  # 마지막 줄바꿈 제거
+        JHY_result = str(JHY_year) + "년의 여성 인구 상위 5개 지역:\n"
+        JHY_index = 1
+        for JHY_data in JHY_top5:
+            JHY_result = JHY_result + str(JHY_index) + ". " + JHY_data[0] + ": " + str(JHY_data[1]["여성"]) + "명\n"
+            JHY_index = JHY_index + 1
+        return JHY_result[:-1]  # 마지막 줄바꿈 제거
     else:
         return str(JHY_year) + "년 데이터가 존재하지 않습니다."
 
@@ -510,9 +520,8 @@ def JHO_gender_ratio(JHO_year, JHO_area):
         return str(JHO_year)+"년의 데이터가 존재하지 않습니다."
     
 #########################################################################
-# 7. 그래프
+# 7. 특정 연도의 지역별 총인구 그래프
 
-# 7-1. 특정 연도의 지역별 총인구 그래프
 import turtle
 def JHO_year_graph(JHO_year):
     turtle.clearscreen()
@@ -532,7 +541,6 @@ def JHO_year_graph(JHO_year):
     JHO.penup()
     JHO.goto(0, -150)
     JHO.pendown()
-
     JHO_width = 40 # 막대의 너비
     JHO_space = 5 # 막대간 간격
     JHO_x = -400 # 현재 막대의 x좌표
@@ -542,7 +550,6 @@ def JHO_year_graph(JHO_year):
             continue
         JHO_per = JHO_data["총"]
         JHO_height = (JHO_per / 50000)
-
         JHO.penup()
         JHO.goto(JHO_x, -150)
         JHO.pendown()
@@ -555,15 +562,11 @@ def JHO_year_graph(JHO_year):
         JHO.right(90)
         JHO.forward(JHO_height)
         JHO.end_fill()
-
         JHO.penup()
         JHO.goto(JHO_x + JHO_width / 2, -170)
         JHO.write(JHO_area, align="center")
-
         JHO.goto(JHO_x + JHO_width / 2, -150 + JHO_height)  # 막대 위쪽으로 이동
         JHO.write(JHO_per, align="center")  # 인구 수 표시
-
-
         JHO_x += JHO_width + JHO_space
 
     JHO.hideturtle()
@@ -575,6 +578,8 @@ def JHO_menu():
         print("")
         print("")
         print("본 프로그램은 2015 ~ 2023년까지의 한국 시도별 인구 데이터를 통계하는 프로그램입니다.")
+        print("지역은 서울, 부산, 대구, 인천, 광주, 대전, 울산, 경기, 세종, 강원,")
+        print("충북, 충남, 전북, 전남, 경북, 경남, 제주가 있습니다.")
         print("원하시는 기능을 입력해주세요 >>> ")
         print("")
         print("1. 특정 연도의 인구 추출")
@@ -636,8 +641,6 @@ def JHO_menu():
             else:
                 print("올바른 형식이 아닙니다")
 
-
-
         # 4번을 누를 시
         elif JHO_cho == 4:
             JHO_area = input("지역을 입력해주세요.(서울, 부산, 인천, 대전, 경기, 강원 등) >>> ")
@@ -681,5 +684,5 @@ def JHO_menu():
             break
         # 잘못된 번호를 누를 시
         else:
-            print("잘못된 숫자입니다. 다시 작성해주세요.")
+            print("잘못된 입력입니다. 다시 작성해주세요.")
 JHO_menu()
