@@ -199,19 +199,19 @@ def JHY_back():
 def JHO_year_total(JHO_year):
     if JHO_year in JHO_pop:
         print(str(JHO_year) + "년의 총인구는 " + str(JHO_pop[JHO_year]["전국"]["총"]) + "명입니다.")
-        return JHY_back()
+    JHY_back()
 
 # 1-2. 특정 연도의 전국 남성 추출 함수
 def JHO_year_m(JHO_year):
     if JHO_year in JHO_pop:
         print(str(JHO_year) + "년의 전국 남성 인구는 " + str(JHO_pop[JHO_year]["전국"]["남성"]) +"명입니다.")
-        return JHY_back()
+    JHY_back()
     
 # 1-3. 특정 연도의 전국 여성 추출 함수
 def JHO_year_w(JHO_year):
     if JHO_year in JHO_pop:
         print( str(JHO_year) + "년의 전국 여성 인구는 " + str(JHO_pop[JHO_year]["전국"]["여성"]) +"명입니다.")
-        return JHY_back()
+    JHY_back()
 
 ########################################################################
 # 2. 특정 연도의 지역 인구 추출
