@@ -588,5 +588,5 @@ def JHO_menu():
         # 잘못된 번호를 누를 시
         else:
             print("잘못된 입력입니다. 다시 작성해주세요.")
-            return JHY_back
+            
 JHO_menu()
