@@ -186,19 +186,12 @@ JHO_pop = {
 JHO_t_area = ["서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"]
 #처음으로 돌아가기
 
-import keyboard
-import os
-
-try:
-    import keyboard  # 이미 설치된 경우
-except ImportError:  # 설치되지 않은 경우
-    os.system('pip install keyboard')  # 설치 실행
-    import keyboard
-
 def JHY_back():
-    print("-" * 50)
-    print("처음으로 돌아가려면 아무 키나 눌러주세요.")
-    keyboard.read_event()  # 키 입력을 감지
+    while True:
+        print("-" * 50)
+        JHY_selec = input("처음으로 돌아가려면 아무 숫자를 입력해주세요 >> ")
+        if JHY_selec:  # 어떤 입력이든 받으면 루프를 빠져나감
+            break
 
 #######################################################################
 # 1. 특정 연도의 인구 추출 함수
