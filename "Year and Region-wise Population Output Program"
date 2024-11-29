@@ -306,7 +306,7 @@ def JHY_top5_t(JHY_year):
     JHY_year = int(JHY_year)  
     if JHY_year in JHO_pop:  
         def JHY_get_total_population(JHO_data):
-            return JHO_data[1]["여성"]  
+            return JHO_data[1]["총"]  
         JHY_sorted_regions = sorted(JHO_pop[JHY_year].items(), key=JHY_get_total_population, reverse=True)
         JHY_top5 = JHY_sorted_regions[:5]  # 상위 5개 지역 추출
         JHY_result = str(JHY_year) + "년의 전체 인구 상위 5개 지역:\n"
