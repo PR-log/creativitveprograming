@@ -490,7 +490,7 @@ def JHO_menu():
                             except ValueError:
                                 print("올바른 형식이 아닙니다. 숫자로 입력해주세요.")
                             else:
-                                if JHY_rank <= 17:
+                                if 1<= JHY_rank <= 17:
                                     JHY_sel = input("전체, 남성, 여성 중에 선택해주세요. >>> ")
                                     if JHY_sel == "전체":
                                         print(JHY_most_populous_region(JHY_year, JHY_rank))
